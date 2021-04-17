@@ -6,7 +6,7 @@ public class Main {
     }
     
     private static void printSols(){
-        RunFile [] sols = {new P1(), new P2(), new P3(), new P4(), new P5(), new P6(), new P7(), new P8()};
+        RunFile [] sols = {new P1(), new P2(), new P3(), new P4(), new P5(), new P6(), new P7(), new P8(), new P9()};
         for (int i = 0; i < sols.length; i++){
             long start = System.nanoTime();
             String output = sols[i].run();
