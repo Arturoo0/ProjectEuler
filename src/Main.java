@@ -1,13 +1,17 @@
 import solutions.*;
 import java.util.concurrent.TimeUnit;
 public class Main {
+    static RunFile [] sols = {new P1(), new P2(), new P3(), new P4(), new P5(), new P6(), new P7(), new P8(), new P9()};
     public static void main(String [] args){
-        printSols();
+        if (isValid(args)) printSols(Integer.parseInt(args[0]));
+        else {
+            System.out.println("Invalid/No args provided.");
+            printSols(1);
+        }
     }
     
-    private static void printSols(){
-        RunFile [] sols = {new P1(), new P2(), new P3(), new P4(), new P5(), new P6(), new P7(), new P8(), new P9()};
-        for (int i = 0; i < sols.length; i++){
+    private static void printSols(int startingProblem){
+        for (int i = startingProblem - 1; i < sols.length; i++){
             long start = System.nanoTime();
             String output = sols[i].run();
             long finish = System.nanoTime();
@@ -15,4 +19,11 @@ public class Main {
             System.out.println(strOutput);
         }
     }
+
+    private static boolean isValid(String[] input){
+        if (input.length == 0) return false;
+        int castedFormat = Integer.parseInt(input[0]);
+        if (castedFormat < 1 || castedFormat > sols.length) return false;
+        return true;
+    } 
 }
