@@ -2,30 +2,34 @@ package solutions;
 import java.util.HashMap;
 
 public class P14 extends RunFile {
-    // Could also use an array
-    private static HashMap<Integer, Integer> cache = new HashMap<>();
+    private final int[] cache = new int[1000000 + 1];
     private static final int TOPBOUND = 1000000;
-    private int getCollatzLen(int val){
-        int valCopy = val, len = 1;
+    private int getCollatzLen(long val){
+        int valCopy = (int) val, len = 1;
         while (val != 1){
-            if (cache.get(val) != null){
-                cache.put(valCopy, len + (cache.get(val) - 1));
-                return cache.get(valCopy);
+            if (val < valCopy && cache[(int) val] != 0){
+                cache[valCopy] = len + (cache[(int) val]);
+                return cache[valCopy];
             }
             if (val % 2 == 0) val /= 2;
             else val = (3 * val) + 1;
             len++;
         }
-        cache.put(valCopy, len);
+        cache[valCopy] = len;
         return len;
     }
 
     private int compute(){
         int longestSeq = 1;
-        for (int i = 1; i <= TOPBOUND; i++){
-            longestSeq = Math.max(longestSeq, getCollatzLen(i));
+        int number = -1;
+        for (int i = 1; i < TOPBOUND; i++){
+            int collatzLen = getCollatzLen((long) i);
+            if (longestSeq < collatzLen){
+                longestSeq = collatzLen;
+                number = i;
+            }
         }
-        return longestSeq;
+        return number;
     }
 
     public String run(){
