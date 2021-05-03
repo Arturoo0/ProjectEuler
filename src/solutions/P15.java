@@ -46,11 +46,6 @@ public class P15 extends RunFile {
                     GRID[r][c] += GRID[r][c - 1]; 
             }
         }
-        // for (int i = 0; i < GRID.length; i++){
-        //     for (int c = 0; c < GRID[i].length; c++){
-        //         System.out.print(GRID[i][c]);
-        //     }
-        // }
         return GRID[R - 1][C - 1];
     }
 
